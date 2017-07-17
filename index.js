@@ -43,6 +43,7 @@ var MyStream = function(options) {
 
   this.del = options.del || ',';
   this.keys = options.keys;
+  this.keysForceText = options.keysForceText;
   this.eol = options.eol || os.EOL;
   this.showHeader = options.showHeader !== false;
 
@@ -147,9 +148,14 @@ MyStream.prototype.writeLine = function(line) {
   var lineObject = JSON.parse(line);
   // use all keys or the ones specified in options.keys
   var keys = that.keys || Object.keys(lineObject);
+  // use none or the ones specified in options.keysForceText
+  var keysForceText = that.keysForceText || [];
   // iterate over all keys
   var iterator = function(item, callback) {
     var val = lineObject[item];
+    if (keysForceText.indexOf(item) !== -1) {
+      val = '"=""' + val.replace('"', '""""') + '"""';
+    }
     that._line.push(val);
     callback(null);
   };
