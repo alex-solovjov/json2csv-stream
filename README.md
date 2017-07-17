@@ -1,19 +1,13 @@
-# json2csv-stream
+Forked from this repo json2csv-stream. ALL credit should go to it's original author. This version was created to fill a need with a current project and has been shared in case it is useful for anyone else out there.
 
-[![Build Status](https://travis-ci.org/zemirco/json2csv-stream.png)](https://travis-ci.org/zemirco/json2csv-stream)
-
-
-Transform json to csv data. The difference to my other module
-[json2csv](https://github.com/zemirco/json2csv) is `json2csv-stream` uses streams for transforming the incoming
-data. The module is built with the new streaming API from Node.js v0.10.0 but maintains backwards compatibility
-to earlier Node.js versions.
+This module transforms json to csv data using streams for transforming the incoming data. The module is built with the new streaming API from Node.js v0.10.0 but maintains backwards compatibility to earlier Node.js versions.
 
 Listen for `header` and `line` events or pipe the data directly to a readable stream.
 
 Install with
 
 ```bash
-$ npm install json2csv-stream
+$ npm install   json2csv-stream-force-text
 ```
 
 ## Transform and pipe data to readable stream
@@ -31,7 +25,7 @@ Input - data.json
 Transformation process
 ```javascript
 var fs = require('fs');
-var MyStream = require('json2csv-stream');
+var MyStream = require('  json2csv-stream-force-text');
 
 // create the transform stream
 var parser = new MyStream();
@@ -71,7 +65,7 @@ parser.on('line', function(data) {
 ## Usage
 
 ```javascript
-var MyStream = require('json2csv-stream');
+var MyStream = require('  json2csv-stream-force-text');
 
 // create the parsing stream with default options
 var parser = new MyStream();
@@ -86,6 +80,7 @@ The following options are supported
  - `keys`: Specify the keys you'd like to output. In the default setting all keys are exported.
  - `eol`: End-of-line marker. Default is the one used by the operating system.
  - `showHeader`: If you don't want the header line in your csv set to `false`. Default is `true`.
+ - `keysForceText`: Specify the keys you'd like to be forced value as text. In the default settings none of keys are forced.
 
 ### Use optional custom delimiter
 
@@ -126,6 +121,16 @@ If you want your csv data without the header line set `showHeader` to `false`;
 ```javascript
 var parser = new MyStream({
   showHeader: false
+});
+```
+
+### Use with values format forced as text 
+
+You can specify which keys values you'd like to be forced to ext format in your `.csv` file. Use the `keysForceText` property.
+
+```javascript
+var parser = new MyStream({
+  keysForceText: ['car','color']
 });
 ```
 
