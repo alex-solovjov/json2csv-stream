@@ -1,3 +1,5 @@
+# json2csv-stream-force-text
+
 Forked from this repo json2csv-stream. ALL credit should go to it's original author. This version was created to fill a need with a current project and has been shared in case it is useful for anyone else out there.
 
 This module transforms json to csv data using streams for transforming the incoming data. The module is built with the new streaming API from Node.js v0.10.0 but maintains backwards compatibility to earlier Node.js versions.
